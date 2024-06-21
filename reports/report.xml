@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="19" failures="0" errors="0" time="52748.263">
+    <testsuite name="tests/bde030-swap-manager.test.ts" timestamp="2024-06-21T07:33:47.497Z" hostname="mikes-macbook" tests="19" failures="0" errors="0" skipped="0" time="0.555">
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with different fee contract" time="0.057">
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with different token-a contract" time="0.035">
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with different token-b contract" time="0.034">
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with same sender" time="0.036">
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with insufficient " time="0.036">
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel unknown swap" time="0.029">
+            <system-out>
+-------------------------
+mintToken: 10000000
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel before expiry" time="0.028">
+            <system-out>
+-------------------------
+mintToken: 10000000
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel with incorrect fee contract" time="0.026">
+            <system-out>
+-------------------------
+mintToken: 10000000
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel with incorrect token contract" time="0.027">
+            <system-out>
+-------------------------
+mintToken: 10000000
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel - not expired" time="0.027">
+            <system-out>
+-------------------------
+mintToken: 10000000
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel - swap is complete" time="0.03">
+            <system-out>
+-------------------------
+mintToken: 10000000
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; can cancel - after swap expires" time="0.029">
+            <system-out>
+-------------------------
+mintToken: 10000000
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : setup &gt; construct - bootstrap proposal sets resource manager extensions" time="0.014">
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : setup &gt; set-registered-token token swap contracts" time="0.026">
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap not allowed if token-a is unregistered" time="0.021">
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap not allowed if token-b is unregistered" time="0.022">
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap not allowed if user is has insufficient funds for escrow" time="0.024">
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap is allowed if sender is buyer" time="0.025">
+            <system-out>
+-------------------------
+mintToken: 10000000
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap is allowed if seller is not specified" time="0.026">
+            <system-out>
+-------------------------
+mintToken: 10000000
+
+            </system-out>
+        </testcase>
+    </testsuite>
+</testsuites>

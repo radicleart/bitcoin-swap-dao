@@ -31,8 +31,6 @@ npx clarigen --watch
 
 ## Tests
 
-Project uses [Clarigen](https://www.clarigen.dev/docs/documentation). To keep the test framerwork up to date with clarity run;
-
 ```bash
 npm run test
 npm run watch

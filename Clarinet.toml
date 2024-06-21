@@ -1,0 +1,146 @@
+[project]
+name = "swaps-dao"
+description = 'Wraps Friedgers swap contracts in Marvins Executor DAO'
+authors = ['mijoco']
+telemetry = false
+cache_dir = '.cache'
+
+[[project.requirements]]
+contract_id = "SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard"
+
+[[project.requirements]]
+contract_id = "SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait"
+
+#[[project.requirements]]
+#contract_id = "SP3DX3H4FEYZJZ586MFBS25ZW3HZDMEW92260R2PR.Wrapped-Bitcoin"
+
+[[project.requirements]]
+contract_id = "SP3N4AJFZZYC4BK99H53XP8KDGXFGQ2PRSQP2HGT6.unwrapped-stx-token"
+
+#[[project.requirements]]
+#contract_id = "SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-token"
+
+[[project.requirements]]
+contract_id = "SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.usda-token"
+
+[[project.requirements]]
+contract_id = "SP6P4EJF0VG8V0RB3TQQKJBHDQKEF6NVRD1KZE3C.satoshibles"
+
+[[project.requirements]]
+contract_id = "SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-bananas"
+
+[contracts.proposal-trait]
+path = "contracts/traits/proposal-trait.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.dao-fees-trait]
+path = "contracts/traits/dao-fees-trait.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.ownable-trait]
+path = "contracts/traits/ownable-trait.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.sip010-ft-trait]
+path = "contracts/traits/sip010-ft-trait.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.extension-trait]
+path = "contracts/traits/extension-trait.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.governance-token-trait]
+path = "contracts/traits/governance-token-trait.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.payment-gateway-trait]
+path = "contracts/traits/payment-gateway-trait.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.bitcoin-dao]
+path = "contracts/bitcoin-dao.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.bde000-governance-token]
+path = "contracts/extensions/bde000-governance-token.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.bde001-proposal-voting]
+path = "contracts/extensions/bde001-proposal-voting.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.bde002-proposal-submission]
+path = "contracts/extensions/bde002-proposal-submission.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.bde003-core-proposals]
+path = "contracts/extensions/bde003-core-proposals.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.bde004-core-execute]
+path = "contracts/extensions/bde004-core-execute.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.bde006-treasury]
+path = "contracts/extensions/bde006-treasury.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.bde030-swap-manager]
+path = "contracts/extensions/bde030-swap-manager.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.dao-swap-fees]
+path = "contracts/external/dao-swap-fees.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.dao-other-fees]
+path = "contracts/external/dao-other-fees.clar"
+clarity_version = 2
+epoch = 2.5
+
+
+[contracts.bdp000-bootstrap]
+path = "contracts/proposals/testnet/bdp000-bootstrap.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.bdp000-executive-team-sunset-height]
+path = "contracts/proposals/testnet/bdp000-executive-team-sunset-height.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.bdp000-core-team-sunset-height]
+path = "contracts/proposals/testnet/bdp000-core-team-sunset-height.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.bdp000-register-token-contracts]
+path = "contracts/proposals/testnet/bdp000-register-token-contracts.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.miamicoin-token]
+path = "contracts/external/miamicoin-token.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.Wrapped-Bitcoin]
+path = "contracts/external/Wrapped-Bitcoin.clar"
+depends_on = ["ft-trait"]
+
