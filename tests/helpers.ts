@@ -19,6 +19,7 @@ export const proposalSubmission = contracts.bde002ProposalSubmission;
 export const coreProposals = contracts.bde003CoreProposals;
 export const coreExecute = contracts.bde004CoreExecute;
 export const treasury = contracts.bde006Treasury;
+export const daoSwapFees = contracts.bde031SwapFees;
 export const bitcoinDao = contracts.bitcoinDao;
 export const extensionTrait = contracts.extensionTrait;
 export const proposalTrait = contracts.proposalTrait;
@@ -32,7 +33,6 @@ export const token_wrappedBitcoin = contracts.wrappedBitcoin;
 export const token_btcMonkeysBananas = contracts.btcMonkeysBananas;
 export const token_miamicoinToken = contracts.miamicoinToken;
 export const token_satoshibles = contracts.satoshibles;
-export const daoSwapFees = contracts.daoSwapFees;
 export const daoOtherFees = contracts.daoOtherFees;
 
 const _errors = projectErrors(project);
@@ -48,6 +48,16 @@ export const errors = {
   bitcoinDao: _errors.bitcoinDao,
 };
 
+export function getAccountBalance(addr:string) {
+  let b = 0n;
+  Object.values(accounts).forEach((account) => {
+    if (account.address === addr) {
+      console.log('getAccountBalance of : ' + deployer + ' is ' + account.balance, account)
+      b = BigInt(account.balance);
+    }
+  });
+  return b;
+}
 export function constructDao() {
   const proposal = simnet.deployer + '.' + 'bdp000-bootstrap'
   const response = txOk(bitcoinDao.construct(proposal), simnet.deployer);
@@ -68,7 +78,7 @@ export function mintToken(amount:bigint, token:string, to:string) {
   if (token === token_wrappedBitcoin.identifier) {
     mintResponse = txOk(token_wrappedBitcoin.mintTokens(amount, to), deployer);
   } else if (token === token_unwrappedStxToken.identifier) {
-    // cant mint stx - but the token contract can transfer it.
+    simnet.transferSTX(amount, to, deployer)
   } else if (token === token_miamicoinToken.identifier) {
     console.log('-------------------------')
     const bal = getBalance(deployer, token_miamicoinToken.identifier)
@@ -84,16 +94,30 @@ export function mintToken(amount:bigint, token:string, to:string) {
 export function getBalance(who:string, token:string) {
   let bal = 0n;
   if (token === token_wrappedBitcoin.identifier) {
-    bal = (rov(token_wrappedBitcoin.getBalance(who), who)).value || 0n
+    bal = (rov(token_wrappedBitcoin.getBalance(who), deployer)).value || 0n
   } else if (token === token_unwrappedStxToken.identifier) {
     // cant mint stx - but the token contract can transfer it.
-    bal = (rov(token_wrappedBitcoin.getBalance(who), who)).value || 0n
+    bal = getAccountBalance(who)
+    console.log('getBalanceyy : ' + who + ' is ' + bal)
   } else if (token === token_miamicoinToken.identifier) {
-    bal = (rov(token_miamicoinToken.getBalance(who), who)).value || 0n
+    bal = (rov(token_miamicoinToken.getBalance(who), deployer)).value || 0n
   } else if (token === token_btcMonkeysBananas.identifier) {
-    bal = (rov(token_btcMonkeysBananas.getBalance(who), who)).value || 0n
+    bal = (rov(token_btcMonkeysBananas.getBalance(who), deployer)).value || 0n
   }
   return bal;
 
+}
+
+export function createFTSwap(amountA:bigint, amountB:bigint, senderB:string, fees:string) {
+  constructDao()
+  passProposalBySignals('bdp000-register-token-contracts');
+  mintToken(1010n, token_wrappedBitcoin.identifier, alice)
+  let receipt = rov(token_wrappedBitcoin.getBalance(alice), alice);
+  expect(receipt.value).toEqual(1010n);
+
+  let response1 = txOk(swapManager.createSwap(amountA, amountB, senderB, token_wrappedBitcoin.identifier, token_miamicoinToken.identifier, fees), alice);
+  expect(response1.value).toBe(0n)
+
+  return response1;
 }
 

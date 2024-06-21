@@ -3,7 +3,7 @@
 
 (use-trait fungible-token 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard.sip-010-trait)
 
-(define-constant fee-receiver .dao-swap-fees)
+(define-constant fee-receiver .dao-other-fees)
 (define-constant err-unauthorised (err u401))
 
 ;; --- authorisation check

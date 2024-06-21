@@ -11,6 +11,9 @@ contract_id = "SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standa
 [[project.requirements]]
 contract_id = "SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait"
 
+[[project.requirements]]
+contract_id = "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.pyth-oracle-v2"
+
 #[[project.requirements]]
 #contract_id = "SP3DX3H4FEYZJZ586MFBS25ZW3HZDMEW92260R2PR.Wrapped-Bitcoin"
 
@@ -104,8 +107,8 @@ path = "contracts/extensions/bde030-ft-swap-manager.clar"
 clarity_version = 2
 epoch = 2.5
 
-[contracts.dao-swap-fees]
-path = "contracts/external/dao-swap-fees.clar"
+[contracts.bde031-swap-fees]
+path = "contracts/extensions/bde031-swap-fees.clar"
 clarity_version = 2
 epoch = 2.5
 

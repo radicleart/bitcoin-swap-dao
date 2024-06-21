@@ -1,142 +1,108 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="43" failures="0" errors="0" time="42.206">
-    <testsuite name="tests/bde030-swap-manager.test.ts" timestamp="2024-06-21T08:52:57.865Z" hostname="mikes-macbook" tests="19" failures="0" errors="0" skipped="0" time="0.755">
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with different fee contract" time="0.062">
+<testsuites name="vitest tests" tests="21" failures="0" errors="0" time="8567.447">
+    <testsuite name="tests/swaps/bde030-ft-swap-manager.test.ts" timestamp="2024-06-21T15:46:17.012Z" hostname="mikes-macbook" tests="21" failures="0" errors="0" skipped="0" time="0.896">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : submit swap &gt; can cancel - after stx/xbtc swap expires" time="0.021">
         </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with different token-a contract" time="0.041">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with different fee contract" time="0.055">
         </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with different token-b contract" time="0.036">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with different token-a contract" time="0.059">
         </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with same sender" time="0.039">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with different token-b contract" time="0.046">
         </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with insufficient " time="0.054">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with same sender" time="0.045">
         </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel unknown swap" time="0.048">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : submit swap &gt; cant submit with insufficient " time="0.039">
+        </testcase>
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel unknown swap" time="0.042">
             <system-out>
 -------------------------
 mintToken: 10000000
 
             </system-out>
         </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel before expiry" time="0.038">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel before expiry" time="0.032">
             <system-out>
 -------------------------
 mintToken: 10000000
 
             </system-out>
         </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel with incorrect fee contract" time="0.034">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel with incorrect fee contract" time="0.032">
             <system-out>
 -------------------------
 mintToken: 10000000
 
             </system-out>
         </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel with incorrect token contract" time="0.034">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel with incorrect token contract" time="0.033">
             <system-out>
 -------------------------
 mintToken: 10000000
 
             </system-out>
         </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel - not expired" time="0.041">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel - not expired" time="0.031">
             <system-out>
 -------------------------
 mintToken: 10000000
 
             </system-out>
         </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel - swap is complete" time="0.042">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : cancellations &gt; cant cancel - swap is complete" time="0.033">
             <system-out>
 -------------------------
 mintToken: 10000000
 
             </system-out>
         </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : cancellations &gt; can cancel - after swap expires" time="0.036">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : cancellations &gt; can cancel - after xbtc/stx swap expires" time="0.04">
+        </testcase>
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : cancellations &gt; can cancel - after stx/xbtc swap expires" time="0.033">
+            <system-out>
+getAccountBalance of : ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM is 100000000000000 {
+  address: [32m&apos;ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5&apos;[39m,
+  balance: [32m&apos;100000000000000&apos;[39m
+}
+getAccountBalance of : ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM is 100000000000000 {
+  address: [32m&apos;ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM&apos;[39m,
+  balance: [32m&apos;100000000000000&apos;[39m
+}
+getAccountBalance of : ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM is 100000000000000 {
+  address: [32m&apos;ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5&apos;[39m,
+  balance: [32m&apos;100000000000000&apos;[39m
+}
+getBalanceyy : ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5 is 100000000000000
+getAccountBalance of : ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM is 100000000000000 {
+  address: [32m&apos;ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM&apos;[39m,
+  balance: [32m&apos;100000000000000&apos;[39m
+}
+getBalanceyy : ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM is 100000000000000
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : setup &gt; construct - bootstrap proposal sets resource manager extensions" time="0.038">
+        </testcase>
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : setup &gt; set-registered-token token swap contracts" time="0.142">
+        </testcase>
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap not allowed if token-a is unregistered" time="0.033">
+        </testcase>
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap not allowed if token-b is unregistered" time="0.032">
+        </testcase>
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap not allowed if user is has insufficient funds for escrow" time="0.035">
+        </testcase>
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap is allowed if sender is buyer" time="0.035">
             <system-out>
 -------------------------
 mintToken: 10000000
 
             </system-out>
         </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : setup &gt; construct - bootstrap proposal sets resource manager extensions" time="0.027">
-        </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : setup &gt; set-registered-token token swap contracts" time="0.038">
-        </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap not allowed if token-a is unregistered" time="0.03">
-        </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap not allowed if token-b is unregistered" time="0.041">
-        </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap not allowed if user is has insufficient funds for escrow" time="0.04">
-        </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap is allowed if sender is buyer" time="0.031">
+        <testcase classname="tests/swaps/bde030-ft-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap is allowed if seller is not specified" time="0.036">
             <system-out>
 -------------------------
 mintToken: 10000000
 
             </system-out>
-        </testcase>
-        <testcase classname="tests/bde030-swap-manager.test.ts" name="swap-manager : create swaps &gt; create-swap is allowed if seller is not specified" time="0.04">
-            <system-out>
--------------------------
-mintToken: 10000000
-
-            </system-out>
-        </testcase>
-    </testsuite>
-    <testsuite name="tests/bde003-core-proposals.test.ts" timestamp="2024-06-21T08:52:57.870Z" hostname="mikes-macbook" tests="9" failures="0" errors="0" skipped="0" time="0.18">
-        <testcase classname="tests/bde003-core-proposals.test.ts" name="bde003-core-proposals sunset tests &gt; construct - bootstrap proposal sets core team" time="0.021">
-        </testcase>
-        <testcase classname="tests/bde003-core-proposals.test.ts" name="bde003-core-proposals sunset tests &gt; core-propose - core proposals can only be proposed by a core team member" time="0.02">
-        </testcase>
-        <testcase classname="tests/bde003-core-proposals.test.ts" name="bde003-core-proposals sunset tests &gt; core-propose - sunset height is 0 by default" time="0.017">
-        </testcase>
-        <testcase classname="tests/bde003-core-proposals.test.ts" name="bde003-core-proposals sunset tests &gt; core-propose - can only be proposed by a core team member" time="0.017">
-        </testcase>
-        <testcase classname="tests/bde003-core-proposals.test.ts" name="bde003-core-proposals sunset tests &gt; core-propose - can only be proposed by core team member" time="0.014">
-        </testcase>
-        <testcase classname="tests/bde003-core-proposals.test.ts" name="bde003-core-proposals sunset tests &gt; core-propose - cannot be proposed twice by the same team member" time="0.02">
-        </testcase>
-        <testcase classname="tests/bde003-core-proposals.test.ts" name="bde003-core-proposals sunset tests &gt; core-propose - cannot propose an already executed proposal" time="0.02">
-        </testcase>
-        <testcase classname="tests/bde003-core-proposals.test.ts" name="bde003-core-proposals sunset tests &gt; core-propose - can set new sunset height" time="0.026">
-        </testcase>
-        <testcase classname="tests/bde003-core-proposals.test.ts" name="bde003-core-proposals sunset tests &gt; core-propose - cannot execute proposals after sunset" time="0.025">
-        </testcase>
-    </testsuite>
-    <testsuite name="tests/bde004-core-execute.test.ts" timestamp="2024-06-21T08:52:57.873Z" hostname="mikes-macbook" tests="9" failures="0" errors="0" skipped="0" time="0.161">
-        <testcase classname="tests/bde004-core-execute.test.ts" name="bde004-core-execute sunset tests &gt; construct - bootstrap proposal sets executive core team" time="0.025">
-        </testcase>
-        <testcase classname="tests/bde004-core-execute.test.ts" name="bde004-core-execute sunset tests &gt; executive-action - can only be signalled by a core executive team member" time="0.016">
-        </testcase>
-        <testcase classname="tests/bde004-core-execute.test.ts" name="bde004-core-execute sunset tests &gt; executive-action - sunset height is 0 by default" time="0.013">
-        </testcase>
-        <testcase classname="tests/bde004-core-execute.test.ts" name="bde004-core-execute sunset tests &gt; executive-action - can only be signalled by a core executive team member" time="0.019">
-        </testcase>
-        <testcase classname="tests/bde004-core-execute.test.ts" name="bde004-core-execute sunset tests &gt; executive-action - can only be signalled by executive team member" time="0.019">
-        </testcase>
-        <testcase classname="tests/bde004-core-execute.test.ts" name="bde004-core-execute sunset tests &gt; executive-action - cannot be signalled twice by the same team member" time="0.016">
-        </testcase>
-        <testcase classname="tests/bde004-core-execute.test.ts" name="bde004-core-execute sunset tests &gt; executive-action - cannot execute an already executed proposal" time="0.018">
-        </testcase>
-        <testcase classname="tests/bde004-core-execute.test.ts" name="bde004-core-execute sunset tests &gt; executive-action - can set new sunset height" time="0.016">
-        </testcase>
-        <testcase classname="tests/bde004-core-execute.test.ts" name="bde004-core-execute sunset tests &gt; executive-action - cannot execute proposals after sunset" time="0.019">
-        </testcase>
-    </testsuite>
-    <testsuite name="tests/bitcoin-dao.test.ts" timestamp="2024-06-21T08:52:57.877Z" hostname="mikes-macbook" tests="6" failures="0" errors="0" skipped="0" time="0.064">
-        <testcase classname="tests/bitcoin-dao.test.ts" name="BitcoinDAO error tests &gt; execute cannot be called by non dao principal" time="0.008">
-        </testcase>
-        <testcase classname="tests/bitcoin-dao.test.ts" name="BitcoinDAO error tests &gt; request-extension-callback cannot be called by unapproved extensions" time="0.011">
-        </testcase>
-        <testcase classname="tests/bitcoin-dao.test.ts" name="BitcoinDAO error tests &gt; construct can only be called by contract deployer" time="0.006">
-        </testcase>
-        <testcase classname="tests/bitcoin-dao.test.ts" name="BitcoinDAO error tests &gt; isExtension returns false" time="0.007">
-        </testcase>
-        <testcase classname="tests/bitcoin-dao.test.ts" name="BitcoinDAO construction tests &gt; construct sets deployer to self" time="0.014">
-        </testcase>
-        <testcase classname="tests/bitcoin-dao.test.ts" name="BitcoinDAO construction tests &gt; construct executes and mints governance token" time="0.018">
         </testcase>
     </testsuite>
 </testsuites>

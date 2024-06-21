@@ -3021,6 +3021,149 @@ export const contracts = {
     clarity_version: "Clarity2",
     contractName: "bde030-ft-swap-manager",
   },
+  bde031SwapFees: {
+    functions: {
+      amtTransferTo: {
+        name: "amt-transfer-to",
+        access: "private",
+        args: [
+          { name: "token", type: "trait_reference" },
+          { name: "amount", type: "uint128" },
+          { name: "to", type: "principal" },
+          { name: "memo", type: { buffer: { length: 34 } } },
+        ],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [
+          token: TypedAbiArg<string, "token">,
+          amount: TypedAbiArg<number | bigint, "amount">,
+          to: TypedAbiArg<string, "to">,
+          memo: TypedAbiArg<Uint8Array, "memo">,
+        ],
+        Response<boolean, bigint>
+      >,
+      calcFees: {
+        name: "calc-fees",
+        access: "private",
+        args: [{ name: "amount", type: "uint128" }],
+        outputs: { type: "uint128" },
+      } as TypedAbiFunction<
+        [amount: TypedAbiArg<number | bigint, "amount">],
+        bigint
+      >,
+      holdFees: {
+        name: "hold-fees",
+        access: "public",
+        args: [
+          { name: "token", type: "trait_reference" },
+          { name: "amt", type: "uint128" },
+        ],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [
+          token: TypedAbiArg<string, "token">,
+          amt: TypedAbiArg<number | bigint, "amt">,
+        ],
+        Response<boolean, bigint>
+      >,
+      isDaoOrExtension: {
+        name: "is-dao-or-extension",
+        access: "public",
+        args: [],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<[], Response<boolean, bigint>>,
+      payFees: {
+        name: "pay-fees",
+        access: "public",
+        args: [
+          { name: "token", type: "trait_reference" },
+          { name: "amt", type: "uint128" },
+        ],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [
+          token: TypedAbiArg<string, "token">,
+          amt: TypedAbiArg<number | bigint, "amt">,
+        ],
+        Response<boolean, bigint>
+      >,
+      releaseFees: {
+        name: "release-fees",
+        access: "public",
+        args: [
+          { name: "token", type: "trait_reference" },
+          { name: "amt", type: "uint128" },
+        ],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [
+          token: TypedAbiArg<string, "token">,
+          amt: TypedAbiArg<number | bigint, "amt">,
+        ],
+        Response<boolean, bigint>
+      >,
+      setFee: {
+        name: "set-fee",
+        access: "public",
+        args: [{ name: "new-fee", type: "uint128" }],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [newFee: TypedAbiArg<number | bigint, "newFee">],
+        Response<boolean, bigint>
+      >,
+      getFees: {
+        name: "get-fees",
+        access: "read_only",
+        args: [{ name: "amt", type: "uint128" }],
+        outputs: { type: { response: { ok: "uint128", error: "none" } } },
+      } as TypedAbiFunction<
+        [amt: TypedAbiArg<number | bigint, "amt">],
+        Response<bigint, null>
+      >,
+    },
+    maps: {},
+    variables: {
+      PRECISION: {
+        name: "PRECISION",
+        type: "uint128",
+        access: "constant",
+      } as TypedAbiVariable<bigint>,
+      errUnauthorised: {
+        name: "err-unauthorised",
+        type: {
+          response: {
+            ok: "none",
+            error: "uint128",
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Response<null, bigint>>,
+      feeReceiver: {
+        name: "fee-receiver",
+        type: "principal",
+        access: "constant",
+      } as TypedAbiVariable<string>,
+      fee: {
+        name: "fee",
+        type: "uint128",
+        access: "variable",
+      } as TypedAbiVariable<bigint>,
+    },
+    constants: {
+      PRECISION: 100_000n,
+      errUnauthorised: {
+        isOk: false,
+        value: 401n,
+      },
+      fee: 100_000n,
+      feeReceiver: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde006-treasury",
+    },
+    non_fungible_tokens: [],
+    fungible_tokens: [],
+    epoch: "Epoch25",
+    clarity_version: "Clarity2",
+    contractName: "bde031-swap-fees",
+  },
   bdp000Bootstrap: {
     functions: {
       execute: {
@@ -3627,135 +3770,13 @@ export const contracts = {
         isOk: false,
         value: 401n,
       },
-      feeReceiver: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-swap-fees",
+      feeReceiver: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-other-fees",
     },
     non_fungible_tokens: [],
     fungible_tokens: [],
     epoch: "Epoch25",
     clarity_version: "Clarity2",
     contractName: "dao-other-fees",
-  },
-  daoSwapFees: {
-    functions: {
-      calcFees: {
-        name: "calc-fees",
-        access: "private",
-        args: [{ name: "xbtc", type: "uint128" }],
-        outputs: { type: "uint128" },
-      } as TypedAbiFunction<
-        [xbtc: TypedAbiArg<number | bigint, "xbtc">],
-        bigint
-      >,
-      xbtcTransferTo: {
-        name: "xbtc-transfer-to",
-        access: "private",
-        args: [
-          { name: "token", type: "trait_reference" },
-          { name: "amount", type: "uint128" },
-          { name: "to", type: "principal" },
-          { name: "memo", type: { buffer: { length: 34 } } },
-        ],
-        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
-      } as TypedAbiFunction<
-        [
-          token: TypedAbiArg<string, "token">,
-          amount: TypedAbiArg<number | bigint, "amount">,
-          to: TypedAbiArg<string, "to">,
-          memo: TypedAbiArg<Uint8Array, "memo">,
-        ],
-        Response<boolean, bigint>
-      >,
-      holdFees: {
-        name: "hold-fees",
-        access: "public",
-        args: [
-          { name: "token", type: "trait_reference" },
-          { name: "xbtc", type: "uint128" },
-        ],
-        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
-      } as TypedAbiFunction<
-        [
-          token: TypedAbiArg<string, "token">,
-          xbtc: TypedAbiArg<number | bigint, "xbtc">,
-        ],
-        Response<boolean, bigint>
-      >,
-      isDaoOrExtension: {
-        name: "is-dao-or-extension",
-        access: "public",
-        args: [],
-        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
-      } as TypedAbiFunction<[], Response<boolean, bigint>>,
-      payFees: {
-        name: "pay-fees",
-        access: "public",
-        args: [
-          { name: "token", type: "trait_reference" },
-          { name: "xbtc", type: "uint128" },
-        ],
-        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
-      } as TypedAbiFunction<
-        [
-          token: TypedAbiArg<string, "token">,
-          xbtc: TypedAbiArg<number | bigint, "xbtc">,
-        ],
-        Response<boolean, bigint>
-      >,
-      releaseFees: {
-        name: "release-fees",
-        access: "public",
-        args: [
-          { name: "token", type: "trait_reference" },
-          { name: "xbtc", type: "uint128" },
-        ],
-        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
-      } as TypedAbiFunction<
-        [
-          token: TypedAbiArg<string, "token">,
-          xbtc: TypedAbiArg<number | bigint, "xbtc">,
-        ],
-        Response<boolean, bigint>
-      >,
-      getFees: {
-        name: "get-fees",
-        access: "read_only",
-        args: [{ name: "xbtc", type: "uint128" }],
-        outputs: { type: { response: { ok: "uint128", error: "none" } } },
-      } as TypedAbiFunction<
-        [xbtc: TypedAbiArg<number | bigint, "xbtc">],
-        Response<bigint, null>
-      >,
-    },
-    maps: {},
-    variables: {
-      errUnauthorised: {
-        name: "err-unauthorised",
-        type: {
-          response: {
-            ok: "none",
-            error: "uint128",
-          },
-        },
-        access: "constant",
-      } as TypedAbiVariable<Response<null, bigint>>,
-      feeReceiver: {
-        name: "fee-receiver",
-        type: "principal",
-        access: "constant",
-      } as TypedAbiVariable<string>,
-    },
-    constants: {
-      errUnauthorised: {
-        isOk: false,
-        value: 401n,
-      },
-      feeReceiver: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-swap-fees",
-    },
-    non_fungible_tokens: [],
-    fungible_tokens: [],
-    epoch: "Epoch25",
-    clarity_version: "Clarity2",
-    contractName: "dao-swap-fees",
   },
   extensionTrait: {
     functions: {},
@@ -3789,6 +3810,1244 @@ export const contracts = {
     epoch: "Epoch25",
     clarity_version: "Clarity2",
     contractName: "governance-token-trait",
+  },
+  hkCursorV2: {
+    functions: {
+      advance: {
+        name: "advance",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+          { name: "offset", type: "uint128" },
+        ],
+        outputs: {
+          type: {
+            tuple: [
+              { name: "bytes", type: { buffer: { length: 8192 } } },
+              { name: "pos", type: "uint128" },
+            ],
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+          offset: TypedAbiArg<number | bigint, "offset">,
+        ],
+        {
+          bytes: Uint8Array;
+          pos: bigint;
+        }
+      >,
+      new: {
+        name: "new",
+        access: "read_only",
+        args: [
+          { name: "bytes", type: { buffer: { length: 8192 } } },
+          { name: "offset", type: { optional: "uint128" } },
+        ],
+        outputs: {
+          type: {
+            tuple: [
+              {
+                name: "next",
+                type: {
+                  tuple: [
+                    { name: "bytes", type: { buffer: { length: 8192 } } },
+                    { name: "pos", type: "uint128" },
+                  ],
+                },
+              },
+              { name: "value", type: { optional: "none" } },
+            ],
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          bytes: TypedAbiArg<Uint8Array, "bytes">,
+          offset: TypedAbiArg<number | bigint | null, "offset">,
+        ],
+        {
+          next: {
+            bytes: Uint8Array;
+            pos: bigint;
+          };
+          value: null | null;
+        }
+      >,
+      readBuff1: {
+        name: "read-buff-1",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: { buffer: { length: 1 } } },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: Uint8Array;
+          },
+          bigint
+        >
+      >,
+      readBuff16: {
+        name: "read-buff-16",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: { buffer: { length: 16 } } },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: Uint8Array;
+          },
+          bigint
+        >
+      >,
+      readBuff2: {
+        name: "read-buff-2",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: { buffer: { length: 2 } } },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: Uint8Array;
+          },
+          bigint
+        >
+      >,
+      readBuff20: {
+        name: "read-buff-20",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: { buffer: { length: 20 } } },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: Uint8Array;
+          },
+          bigint
+        >
+      >,
+      readBuff32: {
+        name: "read-buff-32",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: { buffer: { length: 32 } } },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: Uint8Array;
+          },
+          bigint
+        >
+      >,
+      readBuff4: {
+        name: "read-buff-4",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: { buffer: { length: 4 } } },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: Uint8Array;
+          },
+          bigint
+        >
+      >,
+      readBuff64: {
+        name: "read-buff-64",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: { buffer: { length: 64 } } },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: Uint8Array;
+          },
+          bigint
+        >
+      >,
+      readBuff65: {
+        name: "read-buff-65",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: { buffer: { length: 65 } } },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: Uint8Array;
+          },
+          bigint
+        >
+      >,
+      readBuff8: {
+        name: "read-buff-8",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: { buffer: { length: 8 } } },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: Uint8Array;
+          },
+          bigint
+        >
+      >,
+      readBuff8192Max: {
+        name: "read-buff-8192-max",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+          { name: "size", type: { optional: "uint128" } },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: { buffer: { length: 8192 } } },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+          size: TypedAbiArg<number | bigint | null, "size">,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: Uint8Array;
+          },
+          bigint
+        >
+      >,
+      readInt128: {
+        name: "read-int-128",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: "int128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: bigint;
+          },
+          bigint
+        >
+      >,
+      readInt16: {
+        name: "read-int-16",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: "int128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: bigint;
+          },
+          bigint
+        >
+      >,
+      readInt32: {
+        name: "read-int-32",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: "int128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: bigint;
+          },
+          bigint
+        >
+      >,
+      readInt64: {
+        name: "read-int-64",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: "int128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: bigint;
+          },
+          bigint
+        >
+      >,
+      readInt8: {
+        name: "read-int-8",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: "int128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: bigint;
+          },
+          bigint
+        >
+      >,
+      readUint128: {
+        name: "read-uint-128",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: "uint128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: bigint;
+          },
+          bigint
+        >
+      >,
+      readUint16: {
+        name: "read-uint-16",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: "uint128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: bigint;
+          },
+          bigint
+        >
+      >,
+      readUint32: {
+        name: "read-uint-32",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: "uint128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: bigint;
+          },
+          bigint
+        >
+      >,
+      readUint64: {
+        name: "read-uint-64",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: "uint128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: bigint;
+          },
+          bigint
+        >
+      >,
+      readUint8: {
+        name: "read-uint-8",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  {
+                    name: "next",
+                    type: {
+                      tuple: [
+                        { name: "bytes", type: { buffer: { length: 8192 } } },
+                        { name: "pos", type: "uint128" },
+                      ],
+                    },
+                  },
+                  { name: "value", type: "uint128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+        ],
+        Response<
+          {
+            next: {
+              bytes: Uint8Array;
+              pos: bigint;
+            };
+            value: bigint;
+          },
+          bigint
+        >
+      >,
+      slice: {
+        name: "slice",
+        access: "read_only",
+        args: [
+          {
+            name: "cursor",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                { name: "pos", type: "uint128" },
+              ],
+            },
+          },
+          { name: "size", type: { optional: "uint128" } },
+        ],
+        outputs: { type: { buffer: { length: 8192 } } },
+      } as TypedAbiFunction<
+        [
+          cursor: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              pos: number | bigint;
+            },
+            "cursor"
+          >,
+          size: TypedAbiArg<number | bigint | null, "size">,
+        ],
+        Uint8Array
+      >,
+    },
+    maps: {},
+    variables: {},
+    constants: {},
+    non_fungible_tokens: [],
+    fungible_tokens: [],
+    epoch: "Epoch24",
+    clarity_version: "Clarity2",
+    contractName: "hk-cursor-v2",
   },
   miamicoinToken: {
     functions: {
@@ -4217,6 +5476,1364 @@ export const contracts = {
     epoch: "Epoch25",
     clarity_version: "Clarity2",
     contractName: "proposal-trait",
+  },
+  pythGovernanceV1: {
+    functions: {
+      checkUpdateSource: {
+        name: "check-update-source",
+        access: "private",
+        args: [
+          { name: "emitter-chain", type: "uint128" },
+          { name: "emitter-address", type: { buffer: { length: 32 } } },
+        ],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [
+          emitterChain: TypedAbiArg<number | bigint, "emitterChain">,
+          emitterAddress: TypedAbiArg<Uint8Array, "emitterAddress">,
+        ],
+        Response<boolean, bigint>
+      >,
+      expectActiveDecoderContract: {
+        name: "expect-active-decoder-contract",
+        access: "private",
+        args: [
+          { name: "decoder-contract", type: "trait_reference" },
+          {
+            name: "expected-plan",
+            type: {
+              tuple: [
+                { name: "pyth-decoder-contract", type: "principal" },
+                { name: "pyth-oracle-contract", type: "principal" },
+                { name: "pyth-storage-contract", type: "principal" },
+                { name: "wormhole-core-contract", type: "principal" },
+              ],
+            },
+          },
+        ],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [
+          decoderContract: TypedAbiArg<string, "decoderContract">,
+          expectedPlan: TypedAbiArg<
+            {
+              pythDecoderContract: string;
+              pythOracleContract: string;
+              pythStorageContract: string;
+              wormholeCoreContract: string;
+            },
+            "expectedPlan"
+          >,
+        ],
+        Response<boolean, bigint>
+      >,
+      expectActiveStorageContract: {
+        name: "expect-active-storage-contract",
+        access: "private",
+        args: [
+          { name: "storage-contract", type: "trait_reference" },
+          {
+            name: "expected-plan",
+            type: {
+              tuple: [
+                { name: "pyth-decoder-contract", type: "principal" },
+                { name: "pyth-oracle-contract", type: "principal" },
+                { name: "pyth-storage-contract", type: "principal" },
+                { name: "wormhole-core-contract", type: "principal" },
+              ],
+            },
+          },
+        ],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [
+          storageContract: TypedAbiArg<string, "storageContract">,
+          expectedPlan: TypedAbiArg<
+            {
+              pythDecoderContract: string;
+              pythOracleContract: string;
+              pythStorageContract: string;
+              wormholeCoreContract: string;
+            },
+            "expectedPlan"
+          >,
+        ],
+        Response<boolean, bigint>
+      >,
+      expectActiveWormholeContract: {
+        name: "expect-active-wormhole-contract",
+        access: "private",
+        args: [
+          { name: "wormhole-contract", type: "trait_reference" },
+          {
+            name: "expected-plan",
+            type: {
+              tuple: [
+                { name: "pyth-decoder-contract", type: "principal" },
+                { name: "pyth-oracle-contract", type: "principal" },
+                { name: "pyth-storage-contract", type: "principal" },
+                { name: "wormhole-core-contract", type: "principal" },
+              ],
+            },
+          },
+        ],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [
+          wormholeContract: TypedAbiArg<string, "wormholeContract">,
+          expectedPlan: TypedAbiArg<
+            {
+              pythDecoderContract: string;
+              pythOracleContract: string;
+              pythStorageContract: string;
+              wormholeCoreContract: string;
+            },
+            "expectedPlan"
+          >,
+        ],
+        Response<boolean, bigint>
+      >,
+      expectContractCallPerformedByExpectedOracleContract: {
+        name: "expect-contract-call-performed-by-expected-oracle-contract",
+        access: "private",
+        args: [
+          { name: "former-contract-caller", type: "principal" },
+          {
+            name: "expected-plan",
+            type: {
+              tuple: [
+                { name: "pyth-decoder-contract", type: "principal" },
+                { name: "pyth-oracle-contract", type: "principal" },
+                { name: "pyth-storage-contract", type: "principal" },
+                { name: "wormhole-core-contract", type: "principal" },
+              ],
+            },
+          },
+        ],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [
+          formerContractCaller: TypedAbiArg<string, "formerContractCaller">,
+          expectedPlan: TypedAbiArg<
+            {
+              pythDecoderContract: string;
+              pythOracleContract: string;
+              pythStorageContract: string;
+              wormholeCoreContract: string;
+            },
+            "expectedPlan"
+          >,
+        ],
+        Response<boolean, bigint>
+      >,
+      parseAndVerifyFeeValue: {
+        name: "parse-and-verify-fee-value",
+        access: "private",
+        args: [{ name: "ptgm-body", type: { buffer: { length: 8192 } } }],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  { name: "exponent", type: "uint128" },
+                  { name: "mantissa", type: "uint128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [ptgmBody: TypedAbiArg<Uint8Array, "ptgmBody">],
+        Response<
+          {
+            exponent: bigint;
+            mantissa: bigint;
+          },
+          bigint
+        >
+      >,
+      parseAndVerifyGovernanceDataSource: {
+        name: "parse-and-verify-governance-data-source",
+        access: "private",
+        args: [{ name: "ptgm-body", type: { buffer: { length: 8192 } } }],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  { name: "emitter-address", type: { buffer: { length: 32 } } },
+                  { name: "emitter-chain", type: "uint128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [ptgmBody: TypedAbiArg<Uint8Array, "ptgmBody">],
+        Response<
+          {
+            emitterAddress: Uint8Array;
+            emitterChain: bigint;
+          },
+          bigint
+        >
+      >,
+      parseAndVerifyPricesDataSources: {
+        name: "parse-and-verify-prices-data-sources",
+        access: "private",
+        args: [{ name: "ptgm-body", type: { buffer: { length: 8192 } } }],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                list: {
+                  type: {
+                    tuple: [
+                      {
+                        name: "emitter-address",
+                        type: { buffer: { length: 32 } },
+                      },
+                      { name: "emitter-chain", type: "uint128" },
+                    ],
+                  },
+                  length: 255,
+                },
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [ptgmBody: TypedAbiArg<Uint8Array, "ptgmBody">],
+        Response<
+          {
+            emitterAddress: Uint8Array;
+            emitterChain: bigint;
+          }[],
+          bigint
+        >
+      >,
+      parseAndVerifyPtgm: {
+        name: "parse-and-verify-ptgm",
+        access: "private",
+        args: [
+          { name: "ptgm-bytes", type: { buffer: { length: 8192 } } },
+          { name: "sequence", type: "uint128" },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  { name: "action", type: { buffer: { length: 1 } } },
+                  { name: "body", type: { buffer: { length: 8192 } } },
+                  {
+                    name: "cursor",
+                    type: {
+                      tuple: [
+                        {
+                          name: "next",
+                          type: {
+                            tuple: [
+                              {
+                                name: "bytes",
+                                type: { buffer: { length: 8192 } },
+                              },
+                              { name: "pos", type: "uint128" },
+                            ],
+                          },
+                        },
+                        { name: "value", type: { buffer: { length: 2 } } },
+                      ],
+                    },
+                  },
+                  { name: "module", type: { buffer: { length: 1 } } },
+                  { name: "target-chain-id", type: { buffer: { length: 2 } } },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          ptgmBytes: TypedAbiArg<Uint8Array, "ptgmBytes">,
+          sequence: TypedAbiArg<number | bigint, "sequence">,
+        ],
+        Response<
+          {
+            action: Uint8Array;
+            body: Uint8Array;
+            cursor: {
+              next: {
+                bytes: Uint8Array;
+                pos: bigint;
+              };
+              value: Uint8Array;
+            };
+            module: Uint8Array;
+            targetChainId: Uint8Array;
+          },
+          bigint
+        >
+      >,
+      parseAndVerifyStalePriceThreshold: {
+        name: "parse-and-verify-stale-price-threshold",
+        access: "private",
+        args: [{ name: "ptgm-body", type: { buffer: { length: 8192 } } }],
+        outputs: { type: { response: { ok: "uint128", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [ptgmBody: TypedAbiArg<Uint8Array, "ptgmBody">],
+        Response<bigint, bigint>
+      >,
+      parseDataSource: {
+        name: "parse-data-source",
+        access: "private",
+        args: [
+          { name: "entry", type: { buffer: { length: 1 } } },
+          {
+            name: "acc",
+            type: {
+              tuple: [
+                { name: "bytes", type: { buffer: { length: 8192 } } },
+                {
+                  name: "cursor",
+                  type: {
+                    tuple: [
+                      { name: "index", type: "uint128" },
+                      { name: "next-update-index", type: "uint128" },
+                    ],
+                  },
+                },
+                { name: "limit", type: "uint128" },
+                {
+                  name: "result",
+                  type: {
+                    list: {
+                      type: {
+                        tuple: [
+                          {
+                            name: "emitter-address",
+                            type: { buffer: { length: 32 } },
+                          },
+                          { name: "emitter-chain", type: "uint128" },
+                        ],
+                      },
+                      length: 255,
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            tuple: [
+              { name: "bytes", type: { buffer: { length: 8192 } } },
+              {
+                name: "cursor",
+                type: {
+                  tuple: [
+                    { name: "index", type: "uint128" },
+                    { name: "next-update-index", type: "uint128" },
+                  ],
+                },
+              },
+              { name: "limit", type: "uint128" },
+              {
+                name: "result",
+                type: {
+                  list: {
+                    type: {
+                      tuple: [
+                        {
+                          name: "emitter-address",
+                          type: { buffer: { length: 32 } },
+                        },
+                        { name: "emitter-chain", type: "uint128" },
+                      ],
+                    },
+                    length: 255,
+                  },
+                },
+              },
+            ],
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          entry: TypedAbiArg<Uint8Array, "entry">,
+          acc: TypedAbiArg<
+            {
+              bytes: Uint8Array;
+              cursor: {
+                index: number | bigint;
+                nextUpdateIndex: number | bigint;
+              };
+              limit: number | bigint;
+              result: {
+                emitterAddress: Uint8Array;
+                emitterChain: number | bigint;
+              }[];
+            },
+            "acc"
+          >,
+        ],
+        {
+          bytes: Uint8Array;
+          cursor: {
+            index: bigint;
+            nextUpdateIndex: bigint;
+          };
+          limit: bigint;
+          result: {
+            emitterAddress: Uint8Array;
+            emitterChain: bigint;
+          }[];
+        }
+      >,
+      parsePrincipal: {
+        name: "parse-principal",
+        access: "private",
+        args: [{ name: "ptgm-body", type: { buffer: { length: 8192 } } }],
+        outputs: { type: { response: { ok: "principal", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [ptgmBody: TypedAbiArg<Uint8Array, "ptgmBody">],
+        Response<string, bigint>
+      >,
+      updateFeeRecipientAddress: {
+        name: "update-fee-recipient-address",
+        access: "public",
+        args: [
+          { name: "vaa-bytes", type: { buffer: { length: 8192 } } },
+          { name: "wormhole-core-contract", type: "trait_reference" },
+        ],
+        outputs: { type: { response: { ok: "principal", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [
+          vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">,
+          wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">,
+        ],
+        Response<string, bigint>
+      >,
+      updateFeeValue: {
+        name: "update-fee-value",
+        access: "public",
+        args: [
+          { name: "vaa-bytes", type: { buffer: { length: 8192 } } },
+          { name: "wormhole-core-contract", type: "trait_reference" },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  { name: "exponent", type: "uint128" },
+                  { name: "mantissa", type: "uint128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">,
+          wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">,
+        ],
+        Response<
+          {
+            exponent: bigint;
+            mantissa: bigint;
+          },
+          bigint
+        >
+      >,
+      updateGovernanceDataSource: {
+        name: "update-governance-data-source",
+        access: "public",
+        args: [
+          { name: "vaa-bytes", type: { buffer: { length: 8192 } } },
+          { name: "wormhole-core-contract", type: "trait_reference" },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  { name: "emitter-address", type: { buffer: { length: 32 } } },
+                  { name: "emitter-chain", type: "uint128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">,
+          wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">,
+        ],
+        Response<
+          {
+            emitterAddress: Uint8Array;
+            emitterChain: bigint;
+          },
+          bigint
+        >
+      >,
+      updatePricesDataSources: {
+        name: "update-prices-data-sources",
+        access: "public",
+        args: [
+          { name: "vaa-bytes", type: { buffer: { length: 8192 } } },
+          { name: "wormhole-core-contract", type: "trait_reference" },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                list: {
+                  type: {
+                    tuple: [
+                      {
+                        name: "emitter-address",
+                        type: { buffer: { length: 32 } },
+                      },
+                      { name: "emitter-chain", type: "uint128" },
+                    ],
+                  },
+                  length: 255,
+                },
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">,
+          wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">,
+        ],
+        Response<
+          {
+            emitterAddress: Uint8Array;
+            emitterChain: bigint;
+          }[],
+          bigint
+        >
+      >,
+      updatePythDecoderContract: {
+        name: "update-pyth-decoder-contract",
+        access: "public",
+        args: [
+          { name: "vaa-bytes", type: { buffer: { length: 8192 } } },
+          { name: "wormhole-core-contract", type: "trait_reference" },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  { name: "pyth-decoder-contract", type: "principal" },
+                  { name: "pyth-oracle-contract", type: "principal" },
+                  { name: "pyth-storage-contract", type: "principal" },
+                  { name: "wormhole-core-contract", type: "principal" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">,
+          wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">,
+        ],
+        Response<
+          {
+            pythDecoderContract: string;
+            pythOracleContract: string;
+            pythStorageContract: string;
+            wormholeCoreContract: string;
+          },
+          bigint
+        >
+      >,
+      updatePythOracleContract: {
+        name: "update-pyth-oracle-contract",
+        access: "public",
+        args: [
+          { name: "vaa-bytes", type: { buffer: { length: 8192 } } },
+          { name: "wormhole-core-contract", type: "trait_reference" },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  { name: "pyth-decoder-contract", type: "principal" },
+                  { name: "pyth-oracle-contract", type: "principal" },
+                  { name: "pyth-storage-contract", type: "principal" },
+                  { name: "wormhole-core-contract", type: "principal" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">,
+          wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">,
+        ],
+        Response<
+          {
+            pythDecoderContract: string;
+            pythOracleContract: string;
+            pythStorageContract: string;
+            wormholeCoreContract: string;
+          },
+          bigint
+        >
+      >,
+      updatePythStoreContract: {
+        name: "update-pyth-store-contract",
+        access: "public",
+        args: [
+          { name: "vaa-bytes", type: { buffer: { length: 8192 } } },
+          { name: "wormhole-core-contract", type: "trait_reference" },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  { name: "pyth-decoder-contract", type: "principal" },
+                  { name: "pyth-oracle-contract", type: "principal" },
+                  { name: "pyth-storage-contract", type: "principal" },
+                  { name: "wormhole-core-contract", type: "principal" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">,
+          wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">,
+        ],
+        Response<
+          {
+            pythDecoderContract: string;
+            pythOracleContract: string;
+            pythStorageContract: string;
+            wormholeCoreContract: string;
+          },
+          bigint
+        >
+      >,
+      updateStalePriceThreshold: {
+        name: "update-stale-price-threshold",
+        access: "public",
+        args: [
+          { name: "vaa-bytes", type: { buffer: { length: 8192 } } },
+          { name: "wormhole-core-contract", type: "trait_reference" },
+        ],
+        outputs: { type: { response: { ok: "uint128", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [
+          vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">,
+          wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">,
+        ],
+        Response<bigint, bigint>
+      >,
+      updateWormholeCoreContract: {
+        name: "update-wormhole-core-contract",
+        access: "public",
+        args: [
+          { name: "vaa-bytes", type: { buffer: { length: 8192 } } },
+          { name: "wormhole-core-contract", type: "trait_reference" },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  { name: "pyth-decoder-contract", type: "principal" },
+                  { name: "pyth-oracle-contract", type: "principal" },
+                  { name: "pyth-storage-contract", type: "principal" },
+                  { name: "wormhole-core-contract", type: "principal" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">,
+          wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">,
+        ],
+        Response<
+          {
+            pythDecoderContract: string;
+            pythOracleContract: string;
+            pythStorageContract: string;
+            wormholeCoreContract: string;
+          },
+          bigint
+        >
+      >,
+      checkExecutionFlow: {
+        name: "check-execution-flow",
+        access: "read_only",
+        args: [
+          { name: "former-contract-caller", type: "principal" },
+          {
+            name: "execution-plan-opt",
+            type: {
+              optional: {
+                tuple: [
+                  { name: "pyth-decoder-contract", type: "trait_reference" },
+                  { name: "pyth-storage-contract", type: "trait_reference" },
+                  { name: "wormhole-core-contract", type: "trait_reference" },
+                ],
+              },
+            },
+          },
+        ],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [
+          formerContractCaller: TypedAbiArg<string, "formerContractCaller">,
+          executionPlanOpt: TypedAbiArg<
+            {
+              pythDecoderContract: string;
+              pythStorageContract: string;
+              wormholeCoreContract: string;
+            } | null,
+            "executionPlanOpt"
+          >,
+        ],
+        Response<boolean, bigint>
+      >,
+      checkStorageContract: {
+        name: "check-storage-contract",
+        access: "read_only",
+        args: [{ name: "storage-contract", type: "trait_reference" }],
+        outputs: { type: { response: { ok: "bool", error: "uint128" } } },
+      } as TypedAbiFunction<
+        [storageContract: TypedAbiArg<string, "storageContract">],
+        Response<boolean, bigint>
+      >,
+      getAuthorizedPricesDataSources: {
+        name: "get-authorized-prices-data-sources",
+        access: "read_only",
+        args: [],
+        outputs: {
+          type: {
+            list: {
+              type: {
+                tuple: [
+                  { name: "emitter-address", type: { buffer: { length: 32 } } },
+                  { name: "emitter-chain", type: "uint128" },
+                ],
+              },
+              length: 255,
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [],
+        {
+          emitterAddress: Uint8Array;
+          emitterChain: bigint;
+        }[]
+      >,
+      getCurrentExecutionPlan: {
+        name: "get-current-execution-plan",
+        access: "read_only",
+        args: [],
+        outputs: {
+          type: {
+            tuple: [
+              { name: "pyth-decoder-contract", type: "principal" },
+              { name: "pyth-oracle-contract", type: "principal" },
+              { name: "pyth-storage-contract", type: "principal" },
+              { name: "wormhole-core-contract", type: "principal" },
+            ],
+          },
+        },
+      } as TypedAbiFunction<
+        [],
+        {
+          pythDecoderContract: string;
+          pythOracleContract: string;
+          pythStorageContract: string;
+          wormholeCoreContract: string;
+        }
+      >,
+      getFeeInfo: {
+        name: "get-fee-info",
+        access: "read_only",
+        args: [],
+        outputs: {
+          type: {
+            tuple: [
+              { name: "address", type: "principal" },
+              { name: "exponent", type: "uint128" },
+              { name: "mantissa", type: "uint128" },
+            ],
+          },
+        },
+      } as TypedAbiFunction<
+        [],
+        {
+          address: string;
+          exponent: bigint;
+          mantissa: bigint;
+        }
+      >,
+      getStalePriceThreshold: {
+        name: "get-stale-price-threshold",
+        access: "read_only",
+        args: [],
+        outputs: { type: "uint128" },
+      } as TypedAbiFunction<[], bigint>,
+    },
+    maps: {},
+    variables: {
+      ERR_INVALID_ACTION_PAYLOAD: {
+        name: "ERR_INVALID_ACTION_PAYLOAD",
+        type: {
+          response: {
+            ok: "none",
+            error: "uint128",
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Response<null, bigint>>,
+      ERR_INVALID_PTGM: {
+        name: "ERR_INVALID_PTGM",
+        type: {
+          response: {
+            ok: "none",
+            error: "uint128",
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Response<null, bigint>>,
+      ERR_OUTDATED: {
+        name: "ERR_OUTDATED",
+        type: {
+          response: {
+            ok: "none",
+            error: "uint128",
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Response<null, bigint>>,
+      ERR_UNAUTHORIZED_ACCESS: {
+        name: "ERR_UNAUTHORIZED_ACCESS",
+        type: {
+          response: {
+            ok: "none",
+            error: "uint128",
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Response<null, bigint>>,
+      ERR_UNAUTHORIZED_UPDATE: {
+        name: "ERR_UNAUTHORIZED_UPDATE",
+        type: {
+          response: {
+            ok: "none",
+            error: "uint128",
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Response<null, bigint>>,
+      ERR_UNEXPECTED_ACTION: {
+        name: "ERR_UNEXPECTED_ACTION",
+        type: {
+          response: {
+            ok: "none",
+            error: "uint128",
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Response<null, bigint>>,
+      ERR_UNEXPECTED_ACTION_PAYLOAD: {
+        name: "ERR_UNEXPECTED_ACTION_PAYLOAD",
+        type: {
+          response: {
+            ok: "none",
+            error: "uint128",
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Response<null, bigint>>,
+      EXPECTED_CHAIN_ID: {
+        name: "EXPECTED_CHAIN_ID",
+        type: {
+          buffer: {
+            length: 2,
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Uint8Array>,
+      EXPECTED_MODULE: {
+        name: "EXPECTED_MODULE",
+        type: {
+          buffer: {
+            length: 1,
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Uint8Array>,
+      PTGM_MAGIC: {
+        name: "PTGM_MAGIC",
+        type: {
+          buffer: {
+            length: 4,
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Uint8Array>,
+      PTGM_STALE_PRICE_THRESHOLD: {
+        name: "PTGM_STALE_PRICE_THRESHOLD",
+        type: {
+          buffer: {
+            length: 1,
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Uint8Array>,
+      PTGM_UPDATE_FEE: {
+        name: "PTGM_UPDATE_FEE",
+        type: {
+          buffer: {
+            length: 1,
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Uint8Array>,
+      PTGM_UPDATE_GOVERNANCE_DATA_SOURCE: {
+        name: "PTGM_UPDATE_GOVERNANCE_DATA_SOURCE",
+        type: {
+          buffer: {
+            length: 1,
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Uint8Array>,
+      PTGM_UPDATE_PRICES_DATA_SOURCES: {
+        name: "PTGM_UPDATE_PRICES_DATA_SOURCES",
+        type: {
+          buffer: {
+            length: 1,
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Uint8Array>,
+      PTGM_UPDATE_PYTH_DECODER_ADDRESS: {
+        name: "PTGM_UPDATE_PYTH_DECODER_ADDRESS",
+        type: {
+          buffer: {
+            length: 1,
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Uint8Array>,
+      PTGM_UPDATE_PYTH_ORACLE_ADDRESS: {
+        name: "PTGM_UPDATE_PYTH_ORACLE_ADDRESS",
+        type: {
+          buffer: {
+            length: 1,
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Uint8Array>,
+      PTGM_UPDATE_PYTH_STORE_ADDRESS: {
+        name: "PTGM_UPDATE_PYTH_STORE_ADDRESS",
+        type: {
+          buffer: {
+            length: 1,
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Uint8Array>,
+      PTGM_UPDATE_RECIPIENT_ADDRESS: {
+        name: "PTGM_UPDATE_RECIPIENT_ADDRESS",
+        type: {
+          buffer: {
+            length: 1,
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Uint8Array>,
+      PTGM_UPDATE_WORMHOLE_CORE_ADDRESS: {
+        name: "PTGM_UPDATE_WORMHOLE_CORE_ADDRESS",
+        type: {
+          buffer: {
+            length: 1,
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Uint8Array>,
+      currentExecutionPlan: {
+        name: "current-execution-plan",
+        type: {
+          tuple: [
+            {
+              name: "pyth-decoder-contract",
+              type: "principal",
+            },
+            {
+              name: "pyth-oracle-contract",
+              type: "principal",
+            },
+            {
+              name: "pyth-storage-contract",
+              type: "principal",
+            },
+            {
+              name: "wormhole-core-contract",
+              type: "principal",
+            },
+          ],
+        },
+        access: "variable",
+      } as TypedAbiVariable<{
+        pythDecoderContract: string;
+        pythOracleContract: string;
+        pythStorageContract: string;
+        wormholeCoreContract: string;
+      }>,
+      feeRecipientAddress: {
+        name: "fee-recipient-address",
+        type: "principal",
+        access: "variable",
+      } as TypedAbiVariable<string>,
+      feeValue: {
+        name: "fee-value",
+        type: {
+          tuple: [
+            {
+              name: "exponent",
+              type: "uint128",
+            },
+            {
+              name: "mantissa",
+              type: "uint128",
+            },
+          ],
+        },
+        access: "variable",
+      } as TypedAbiVariable<{
+        exponent: bigint;
+        mantissa: bigint;
+      }>,
+      governanceDataSource: {
+        name: "governance-data-source",
+        type: {
+          tuple: [
+            {
+              name: "emitter-address",
+              type: {
+                buffer: {
+                  length: 32,
+                },
+              },
+            },
+            {
+              name: "emitter-chain",
+              type: "uint128",
+            },
+          ],
+        },
+        access: "variable",
+      } as TypedAbiVariable<{
+        emitterAddress: Uint8Array;
+        emitterChain: bigint;
+      }>,
+      lastSequenceProcessed: {
+        name: "last-sequence-processed",
+        type: "uint128",
+        access: "variable",
+      } as TypedAbiVariable<bigint>,
+      pricesDataSources: {
+        name: "prices-data-sources",
+        type: {
+          list: {
+            type: {
+              tuple: [
+                {
+                  name: "emitter-address",
+                  type: {
+                    buffer: {
+                      length: 32,
+                    },
+                  },
+                },
+                {
+                  name: "emitter-chain",
+                  type: "uint128",
+                },
+              ],
+            },
+            length: 255,
+          },
+        },
+        access: "variable",
+      } as TypedAbiVariable<
+        {
+          emitterAddress: Uint8Array;
+          emitterChain: bigint;
+        }[]
+      >,
+      stalePriceThreshold: {
+        name: "stale-price-threshold",
+        type: "uint128",
+        access: "variable",
+      } as TypedAbiVariable<bigint>,
+    },
+    constants: {},
+    non_fungible_tokens: [],
+    fungible_tokens: [],
+    epoch: "Epoch24",
+    clarity_version: "Clarity2",
+    contractName: "pyth-governance-v1",
+  },
+  pythOracleV2: {
+    functions: {
+      decodePriceFeeds: {
+        name: "decode-price-feeds",
+        access: "public",
+        args: [
+          { name: "price-feed-bytes", type: { buffer: { length: 8192 } } },
+          {
+            name: "execution-plan",
+            type: {
+              tuple: [
+                { name: "pyth-decoder-contract", type: "trait_reference" },
+                { name: "pyth-storage-contract", type: "trait_reference" },
+                { name: "wormhole-core-contract", type: "trait_reference" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                list: {
+                  type: {
+                    tuple: [
+                      { name: "conf", type: "uint128" },
+                      { name: "ema-conf", type: "uint128" },
+                      { name: "ema-price", type: "int128" },
+                      { name: "expo", type: "int128" },
+                      { name: "prev-publish-time", type: "uint128" },
+                      { name: "price", type: "int128" },
+                      {
+                        name: "price-identifier",
+                        type: { buffer: { length: 32 } },
+                      },
+                      { name: "publish-time", type: "uint128" },
+                    ],
+                  },
+                  length: 64,
+                },
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          priceFeedBytes: TypedAbiArg<Uint8Array, "priceFeedBytes">,
+          executionPlan: TypedAbiArg<
+            {
+              pythDecoderContract: string;
+              pythStorageContract: string;
+              wormholeCoreContract: string;
+            },
+            "executionPlan"
+          >,
+        ],
+        Response<
+          {
+            conf: bigint;
+            emaConf: bigint;
+            emaPrice: bigint;
+            expo: bigint;
+            prevPublishTime: bigint;
+            price: bigint;
+            priceIdentifier: Uint8Array;
+            publishTime: bigint;
+          }[],
+          bigint
+        >
+      >,
+      readPriceFeed: {
+        name: "read-price-feed",
+        access: "public",
+        args: [
+          { name: "price-feed-id", type: { buffer: { length: 32 } } },
+          { name: "pyth-storage-address", type: "trait_reference" },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                tuple: [
+                  { name: "conf", type: "uint128" },
+                  { name: "ema-conf", type: "uint128" },
+                  { name: "ema-price", type: "int128" },
+                  { name: "expo", type: "int128" },
+                  { name: "prev-publish-time", type: "uint128" },
+                  { name: "price", type: "int128" },
+                  { name: "publish-time", type: "uint128" },
+                ],
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          priceFeedId: TypedAbiArg<Uint8Array, "priceFeedId">,
+          pythStorageAddress: TypedAbiArg<string, "pythStorageAddress">,
+        ],
+        Response<
+          {
+            conf: bigint;
+            emaConf: bigint;
+            emaPrice: bigint;
+            expo: bigint;
+            prevPublishTime: bigint;
+            price: bigint;
+            publishTime: bigint;
+          },
+          bigint
+        >
+      >,
+      verifyAndUpdatePriceFeeds: {
+        name: "verify-and-update-price-feeds",
+        access: "public",
+        args: [
+          { name: "price-feed-bytes", type: { buffer: { length: 8192 } } },
+          {
+            name: "execution-plan",
+            type: {
+              tuple: [
+                { name: "pyth-decoder-contract", type: "trait_reference" },
+                { name: "pyth-storage-contract", type: "trait_reference" },
+                { name: "wormhole-core-contract", type: "trait_reference" },
+              ],
+            },
+          },
+        ],
+        outputs: {
+          type: {
+            response: {
+              ok: {
+                list: {
+                  type: {
+                    tuple: [
+                      { name: "conf", type: "uint128" },
+                      { name: "ema-conf", type: "uint128" },
+                      { name: "ema-price", type: "int128" },
+                      { name: "expo", type: "int128" },
+                      { name: "prev-publish-time", type: "uint128" },
+                      { name: "price", type: "int128" },
+                      {
+                        name: "price-identifier",
+                        type: { buffer: { length: 32 } },
+                      },
+                      { name: "publish-time", type: "uint128" },
+                    ],
+                  },
+                  length: 64,
+                },
+              },
+              error: "uint128",
+            },
+          },
+        },
+      } as TypedAbiFunction<
+        [
+          priceFeedBytes: TypedAbiArg<Uint8Array, "priceFeedBytes">,
+          executionPlan: TypedAbiArg<
+            {
+              pythDecoderContract: string;
+              pythStorageContract: string;
+              wormholeCoreContract: string;
+            },
+            "executionPlan"
+          >,
+        ],
+        Response<
+          {
+            conf: bigint;
+            emaConf: bigint;
+            emaPrice: bigint;
+            expo: bigint;
+            prevPublishTime: bigint;
+            price: bigint;
+            priceIdentifier: Uint8Array;
+            publishTime: bigint;
+          }[],
+          bigint
+        >
+      >,
+    },
+    maps: {},
+    variables: {
+      ERR_BALANCE_INSUFFICIENT: {
+        name: "ERR_BALANCE_INSUFFICIENT",
+        type: {
+          response: {
+            ok: "none",
+            error: "uint128",
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Response<null, bigint>>,
+      ERR_PANIC: {
+        name: "ERR_PANIC",
+        type: {
+          response: {
+            ok: "none",
+            error: "uint128",
+          },
+        },
+        access: "constant",
+      } as TypedAbiVariable<Response<null, bigint>>,
+    },
+    constants: {},
+    non_fungible_tokens: [],
+    fungible_tokens: [],
+    epoch: "Epoch24",
+    clarity_version: "Clarity2",
+    contractName: "pyth-oracle-v2",
+  },
+  pythTraitsV1: {
+    functions: {},
+    maps: {},
+    variables: {},
+    constants: {},
+    non_fungible_tokens: [],
+    fungible_tokens: [],
+    epoch: "Epoch24",
+    clarity_version: "Clarity2",
+    contractName: "pyth-traits-v1",
   },
   satoshibles: {
     functions: {
@@ -4860,6 +7477,17 @@ export const contracts = {
     clarity_version: "Clarity1",
     contractName: "usda-token",
   },
+  wormholeTraitsV1: {
+    functions: {},
+    maps: {},
+    variables: {},
+    constants: {},
+    non_fungible_tokens: [],
+    fungible_tokens: [],
+    epoch: "Epoch24",
+    clarity_version: "Clarity2",
+    contractName: "wormhole-traits-v1",
+  },
 } as const;
 
 export const accounts = {
@@ -4924,6 +7552,7 @@ export const identifiers = {
   bde006Treasury: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde006-treasury",
   bde030FtSwapManager:
     "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde030-ft-swap-manager",
+  bde031SwapFees: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde031-swap-fees",
   bdp000Bootstrap: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bdp000-bootstrap",
   bdp000CoreTeamSunsetHeight:
     "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bdp000-core-team-sunset-height",
@@ -4937,17 +7566,21 @@ export const identifiers = {
   commissionTrait: "SP6P4EJF0VG8V0RB3TQQKJBHDQKEF6NVRD1KZE3C.commission-trait",
   daoFeesTrait: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-fees-trait",
   daoOtherFees: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-other-fees",
-  daoSwapFees: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-swap-fees",
   extensionTrait: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.extension-trait",
   ftTrait: "SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.ft-trait",
   governanceTokenTrait:
     "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.governance-token-trait",
+  hkCursorV2: "SP2J933XB2CP2JQ1A4FGN8JA968BBG3NK3EKZ7Q9F.hk-cursor-v2",
   miamicoinToken: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.miamicoin-token",
   nftTrait: "SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait",
   ownableTrait: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ownable-trait",
   paymentGatewayTrait:
     "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.payment-gateway-trait",
   proposalTrait: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-trait",
+  pythGovernanceV1:
+    "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.pyth-governance-v1",
+  pythOracleV2: "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.pyth-oracle-v2",
+  pythTraitsV1: "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.pyth-traits-v1",
   satoshibles: "SP6P4EJF0VG8V0RB3TQQKJBHDQKEF6NVRD1KZE3C.satoshibles",
   sip010TraitFtStandard:
     "SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard",
@@ -4955,6 +7588,8 @@ export const identifiers = {
   unwrappedStxToken:
     "SP3N4AJFZZYC4BK99H53XP8KDGXFGQ2PRSQP2HGT6.unwrapped-stx-token",
   usdaToken: "SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.usda-token",
+  wormholeTraitsV1:
+    "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.wormhole-traits-v1",
 } as const;
 
 export const simnet = {
@@ -5034,6 +7669,12 @@ export const deployments = {
     testnet: null,
     mainnet: null,
   },
+  bde031SwapFees: {
+    devnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde031-swap-fees",
+    simnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde031-swap-fees",
+    testnet: null,
+    mainnet: null,
+  },
   bdp000Bootstrap: {
     devnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bdp000-bootstrap",
     simnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bdp000-bootstrap",
@@ -5094,12 +7735,6 @@ export const deployments = {
     testnet: null,
     mainnet: null,
   },
-  daoSwapFees: {
-    devnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-swap-fees",
-    simnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-swap-fees",
-    testnet: null,
-    mainnet: null,
-  },
   extensionTrait: {
     devnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.extension-trait",
     simnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.extension-trait",
@@ -5115,6 +7750,12 @@ export const deployments = {
   governanceTokenTrait: {
     devnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.governance-token-trait",
     simnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.governance-token-trait",
+    testnet: null,
+    mainnet: null,
+  },
+  hkCursorV2: {
+    devnet: "SP2J933XB2CP2JQ1A4FGN8JA968BBG3NK3EKZ7Q9F.hk-cursor-v2",
+    simnet: "SP2J933XB2CP2JQ1A4FGN8JA968BBG3NK3EKZ7Q9F.hk-cursor-v2",
     testnet: null,
     mainnet: null,
   },
@@ -5145,6 +7786,24 @@ export const deployments = {
   proposalTrait: {
     devnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-trait",
     simnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-trait",
+    testnet: null,
+    mainnet: null,
+  },
+  pythGovernanceV1: {
+    devnet: "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.pyth-governance-v1",
+    simnet: "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.pyth-governance-v1",
+    testnet: null,
+    mainnet: null,
+  },
+  pythOracleV2: {
+    devnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-oracle-v2",
+    simnet: "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.pyth-oracle-v2",
+    testnet: null,
+    mainnet: "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.pyth-oracle-v2",
+  },
+  pythTraitsV1: {
+    devnet: "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.pyth-traits-v1",
+    simnet: "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.pyth-traits-v1",
     testnet: null,
     mainnet: null,
   },
@@ -5180,6 +7839,12 @@ export const deployments = {
     simnet: "SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.usda-token",
     testnet: null,
     mainnet: "SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.usda-token",
+  },
+  wormholeTraitsV1: {
+    devnet: "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.wormhole-traits-v1",
+    simnet: "SP2T5JKWWP3FYYX4YRK8GK5BG2YCNGEAEY2P2PKN0.wormhole-traits-v1",
+    testnet: null,
+    mainnet: null,
   },
 } as const;
 

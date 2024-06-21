@@ -1,13 +1,10 @@
 ;; Title: BDE030 Swap Manager
-;; Authors: friedger (then rafa n mike)
+;; Authors: friedger then rafa then mijoco
 ;; Synopsis:
 ;; This extension manages swaps for arbitrary sip-010 tokens.
 ;; Description:
-;; The extension provides a secure way for user to manage the slippage they wish to tolerate.
-;; Alice makes an offer for token-a and pays a deposit in stable coin. If the offer is not accepted the
-;; deposit expires and Alice claims back her deposit. To accept Alices offer Bob escrows an amount of 
-;; token-b - this determines the amount of token-a Alices is required to commit. Alice can either complete
-;; the swap or decline, forfeiting her deposit. 
+;; Based on Friedger Catamaran Swaps. The swaps are brought under the control
+;; of bitcoin-dao (an instance of Executor Dao by Marvin Janssen).
 
 ;; traits
 ;;
