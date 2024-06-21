@@ -1,7 +1,7 @@
 # Swaps DAO
 
-Wraps Friedgers [swap contracts](https://github.com/friedger/clarity-catamaranswaps) in
-Marvins [Executor DAO](https://github.com/Clarity-Innovation-Lab/ecosystem-dao)
+Wraps [Friedger Swaps](https://github.com/friedger/clarity-catamaranswaps) in
+Marvins' [Executor DAO](https://github.com/Clarity-Innovation-Lab/ecosystem-dao)
 
 See also;
 
