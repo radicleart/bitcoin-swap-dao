@@ -99,8 +99,8 @@ path = "contracts/extensions/bde006-treasury.clar"
 clarity_version = 2
 epoch = 2.5
 
-[contracts.bde030-swap-manager]
-path = "contracts/extensions/bde030-swap-manager.clar"
+[contracts.bde030-ft-swap-manager]
+path = "contracts/extensions/bde030-ft-swap-manager.clar"
 clarity_version = 2
 epoch = 2.5
 

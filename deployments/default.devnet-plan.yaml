@@ -136,10 +136,10 @@ plan:
             anchor-block-only: true
             clarity-version: 2
         - contract-publish:
-            contract-name: bde030-swap-manager
+            contract-name: bde030-ft-swap-manager
             expected-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
             cost: 31290
-            path: contracts/extensions/bde030-swap-manager.clar
+            path: contracts/extensions/bde030-ft-swap-manager.clar
             anchor-block-only: true
             clarity-version: 2
         - contract-publish:

@@ -11,7 +11,7 @@ export const bob = accounts.wallet_2.address;
 export const charlie = accounts.wallet_3.address;
 export const fred = accounts.wallet_9.address;
 
-export const swapManager = contracts.bde030SwapManager;
+export const swapManager = contracts.bde030FtSwapManager;
 
 export const governanceToken = contracts.bde000GovernanceToken;
 export const proposalVoting = contracts.bde001ProposalVoting;
@@ -38,7 +38,7 @@ export const daoOtherFees = contracts.daoOtherFees;
 const _errors = projectErrors(project);
 
 export const errors = {
-  swapManager: _errors.bde030SwapManager,
+  swapManager: _errors.bde030FtSwapManager,
   governanceToken: _errors.bde000GovernanceToken,
   proposalVoting: _errors.bde001ProposalVoting,
   proposalSubmission: _errors.bde002ProposalSubmission,

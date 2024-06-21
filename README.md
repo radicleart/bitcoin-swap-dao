@@ -7,7 +7,7 @@ See also;
 
 - [bitcoin-dao](https://github.com/radicleart/bitcoin-dao)
 
-Note: this is experimental code - use at your own risk
+Note: this is experimental (incomplete) code - for instructional purposes only.
 
 ## Extensions
 
@@ -19,7 +19,7 @@ Swaps DAO will launch with the following additional features;
 - bde003-core-proposals
 - bde004-core-execute
 - bde006-treasury
-- bde020-swap-manager
+- bde030-fswap-manager
 
 ## Clarigen
 

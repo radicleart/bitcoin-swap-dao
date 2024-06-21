@@ -2667,7 +2667,7 @@ export const contracts = {
     clarity_version: "Clarity2",
     contractName: "bde006-treasury",
   },
-  bde030SwapManager: {
+  bde030FtSwapManager: {
     functions: {
       tokenTransferTo: {
         name: "token-transfer-to",
@@ -3019,7 +3019,7 @@ export const contracts = {
     fungible_tokens: [],
     epoch: "Epoch25",
     clarity_version: "Clarity2",
-    contractName: "bde030-swap-manager",
+    contractName: "bde030-ft-swap-manager",
   },
   bdp000Bootstrap: {
     functions: {
@@ -4922,8 +4922,8 @@ export const identifiers = {
   bde004CoreExecute:
     "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde004-core-execute",
   bde006Treasury: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde006-treasury",
-  bde030SwapManager:
-    "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde030-swap-manager",
+  bde030FtSwapManager:
+    "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde030-ft-swap-manager",
   bdp000Bootstrap: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bdp000-bootstrap",
   bdp000CoreTeamSunsetHeight:
     "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bdp000-core-team-sunset-height",
@@ -4943,7 +4943,7 @@ export const identifiers = {
   governanceTokenTrait:
     "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.governance-token-trait",
   miamicoinToken: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.miamicoin-token",
-  nftTrait: "SP6P4EJF0VG8V0RB3TQQKJBHDQKEF6NVRD1KZE3C.nft-trait",
+  nftTrait: "SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait",
   ownableTrait: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ownable-trait",
   paymentGatewayTrait:
     "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.payment-gateway-trait",
@@ -5028,9 +5028,9 @@ export const deployments = {
     testnet: null,
     mainnet: null,
   },
-  bde030SwapManager: {
-    devnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde030-swap-manager",
-    simnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde030-swap-manager",
+  bde030FtSwapManager: {
+    devnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde030-ft-swap-manager",
+    simnet: "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.bde030-ft-swap-manager",
     testnet: null,
     mainnet: null,
   },

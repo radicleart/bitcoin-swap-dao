@@ -578,6 +578,18 @@ plan:
       transactions: []
       epoch: "2.1"
     - id: 155
+      transactions: []
+      epoch: "2.1"
+    - id: 156
+      transactions: []
+      epoch: "2.1"
+    - id: 157
+      transactions: []
+      epoch: "2.1"
+    - id: 158
+      transactions: []
+      epoch: "2.1"
+    - id: 159
       transactions:
         - emulated-contract-publish:
             contract-name: extension-trait
@@ -640,9 +652,9 @@ plan:
             path: contracts/traits/dao-fees-trait.clar
             clarity-version: 2
         - emulated-contract-publish:
-            contract-name: bde030-swap-manager
+            contract-name: bde030-ft-swap-manager
             emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
-            path: contracts/extensions/bde030-swap-manager.clar
+            path: contracts/extensions/bde030-ft-swap-manager.clar
             clarity-version: 2
         - emulated-contract-publish:
             contract-name: bdp000-bootstrap
@@ -689,18 +701,6 @@ plan:
             emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
             path: contracts/traits/payment-gateway-trait.clar
             clarity-version: 2
-      epoch: "2.5"
-    - id: 156
-      transactions: []
-      epoch: "2.5"
-    - id: 157
-      transactions: []
-      epoch: "2.5"
-    - id: 158
-      transactions: []
-      epoch: "2.5"
-    - id: 159
-      transactions: []
       epoch: "2.5"
     - id: 160
       transactions: []
@@ -1147,5 +1147,29 @@ plan:
       transactions: []
       epoch: "2.5"
     - id: 308
+      transactions: []
+      epoch: "2.5"
+    - id: 309
+      transactions: []
+      epoch: "2.5"
+    - id: 310
+      transactions: []
+      epoch: "2.5"
+    - id: 311
+      transactions: []
+      epoch: "2.5"
+    - id: 312
+      transactions: []
+      epoch: "2.5"
+    - id: 313
+      transactions: []
+      epoch: "2.5"
+    - id: 314
+      transactions: []
+      epoch: "2.5"
+    - id: 315
+      transactions: []
+      epoch: "2.5"
+    - id: 316
       transactions: []
       epoch: "2.5"

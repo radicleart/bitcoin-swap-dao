@@ -22,7 +22,7 @@
 				{extension: .bde003-core-proposals, enabled: true}
 				{extension: .bde004-core-execute, enabled: true}
 				{extension: .bde006-treasury, enabled: true}
-				{extension: .bde030-swap-manager, enabled: true}
+				{extension: .bde030-ft-swap-manager, enabled: true}
 			)
 		))
 
